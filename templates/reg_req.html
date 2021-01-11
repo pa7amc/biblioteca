@@ -1,0 +1,29 @@
+{% extends "base.html"%}
+{%block title %}Registar requisito - Biblioteca{%endblock%}
+{%block content%}
+
+
+<form action="/reg_req" method="post">
+
+    <p>Cartão de Cidadão</p>
+    <input type="cc" id="cc" name="cc" required="required" class="cc" placeholder="ex: 12345678">
+
+    <p>ISBN do livro</p>
+    <input type="text" id="isbn" name="isbn" required="required" class="isbn" >
+
+    <p>Data de Requisição</p>
+    <input type="date" id="dn" name="dt_req" required="required" class="dt_req" placeholder="dd/mm/yyyy">
+
+    <p>Data de Entrega</p>
+    <input type="date" id="dn" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
+
+    <input type="submit" class="sub" value="Registo do requisito">
+
+    <!-- mudar estado livro para 1-->
+
+</form>
+
+<hr/>
+<a href="/"><button type="button">Voltar</button></a>
+
+{%endblock%}

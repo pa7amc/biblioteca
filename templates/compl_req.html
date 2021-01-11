@@ -1,0 +1,24 @@
+
+
+{% extends "base.html"%}
+{%block title %}Fechar requisito - Biblioteca{%endblock%}
+{%block content%}
+
+
+<form action="/reg_req" method="post">
+
+    <p>ISBN do livro</p>
+    <input type="text" id="isbn" name="isbn" required="required" class="isbn" >
+
+    <p>Data de Entrega</p>
+    <input type="date" id="dn" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
+
+    <input type="submit" class="sub" value="Fecho do requisito">
+<!--mudar estado livro para 0-->
+
+</form>
+
+<hr/>
+<a href="/"><button type="button">Voltar</button></a>
+
+{%endblock%}
