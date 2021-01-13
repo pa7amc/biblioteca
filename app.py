@@ -11,13 +11,47 @@ db = SQLAlchemy(app)
 
 
 class Livro(db.Model):
+    __tablename__ = 'livro'
     ISBN = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(150))
     autor = db.Column(db.String(70))
     editora = db.Column(db.String(70))
     ano = db.Column(db.Integer)
     #date = db.Column(db.DateTime, default=datetime.now)
-    estado = db.Column(db.Integer)
+    requisitado = db.Column(db.Boolean, default=False)
+
+class Socio(db.Model):
+    __tablename__ = 'socio'
+    cc = db.Column(db.Integer, primary_key=True)
+    nome_soc = db.Column(db.String(150))
+    email = db.Column(db.String(50))
+    data_n = db.Column(db.DateTime)
+    morada = db.Column(db.String(150))
+    ano_inscri = db.Column(db.Integer)
+    ativo = db.Column(db.Boolean, default=True)
+
+class Campanha(db.Model):
+    __tablename__ = 'campanha'
+    id_camp = db.Column(db.Integer, primary_key=True)
+    nome_camp = db.Column(db.String(150))
+
+class Requisito(db.Model):
+    __tablename__ = 'requisito'
+    id_req = db.Column(db.Integer, primary_key=True)
+    ISBN_req = db.Column(db.Integer, db.ForeignKey('livro.ISBN'))
+    cc_req = db.Column(db.Integer, db.ForeignKey('socio.cc'))
+    data_req = db.Column(db.DateTime, default=datetime.now)
+    data_entr = db.Column(db.DateTime)
+
+
+class Socio_Camp(db.Model):
+    __tablename__ = 'socio_camp'
+    id_sc = db.Column(db.Integer, primary_key=True)
+    id_camp_sc = db.Column(db.Integer, db.ForeignKey('campanha.id_camp'))
+    cc_sc = db.Column(db.Integer, db.ForeignKey('socio.cc'))
+    #se comecou a ser socio naquela campanha - true, senao - false
+    novo = db.Column(db.Boolean, default=False) """
+
 
 
 
@@ -50,7 +84,7 @@ def reg_livro2():
     ano = request.form.get('ano', '')
     edicao = request.form.get('edi', '')
 
-    livro = Livro(ISBN=ISBN, titulo=tit, autor=autor, editora=editora, ano=ano, estado=0)
+    livro = Livro(ISBN=ISBN, titulo=tit, autor=autor, editora=editora, ano=ano, requisitado=False)
 
     db.session.add(livro)
     db.session.commit()
@@ -87,5 +121,11 @@ def ver_soc():
 port = int(os.getenv("PORT", 5000))
 
 if __name__ == "__main__":
+    import  Database.Tables.Livro
+    import  Database.Tables.Socio
+    import  Database.Tables.Campanha
+    import  Database.Tables.Requisito
+    import  Database.Tables.Socio_Camp
+
     db.create_all()
     app.run(host='0.0.0.0', port=port)
