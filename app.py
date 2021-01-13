@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 from datetime import datetime
 import os
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, date
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
@@ -17,18 +19,17 @@ class Livro(db.Model):
     autor = db.Column(db.String(70))
     editora = db.Column(db.String(70))
     ano = db.Column(db.Integer)
-    #date = db.Column(db.DateTime, default=datetime.now)
-    requisitado = db.Column(db.Boolean, default=False)
+    requisitado = db.Column(db.String(2), default='N')
 
 class Socio(db.Model):
     __tablename__ = 'socio'
     cc = db.Column(db.Integer, primary_key=True)
     nome_soc = db.Column(db.String(150))
     email = db.Column(db.String(50))
-    data_n = db.Column(db.DateTime)
+    data_n = db.Column(db.String(10))
     morada = db.Column(db.String(150))
     ano_inscri = db.Column(db.Integer)
-    ativo = db.Column(db.Boolean, default=True)
+    ativo = db.Column(db.String(2))
 
 class Campanha(db.Model):
     __tablename__ = 'campanha'
@@ -40,8 +41,8 @@ class Requisito(db.Model):
     id_req = db.Column(db.Integer, primary_key=True)
     ISBN_req = db.Column(db.Integer, db.ForeignKey('livro.ISBN'))
     cc_req = db.Column(db.Integer, db.ForeignKey('socio.cc'))
-    data_req = db.Column(db.DateTime, default=datetime.now)
-    data_entr = db.Column(db.DateTime)
+    data_req = db.Column(db.String(10))
+    data_entr = db.Column(db.String(10))
 
 
 class Socio_Camp(db.Model):
@@ -50,7 +51,7 @@ class Socio_Camp(db.Model):
     id_camp_sc = db.Column(db.Integer, db.ForeignKey('campanha.id_camp'))
     cc_sc = db.Column(db.Integer, db.ForeignKey('socio.cc'))
     #se comecou a ser socio naquela campanha - true, senao - false
-    novo = db.Column(db.Boolean, default=False) """
+    novo = db.Column(db.String(2))
 
 
 
@@ -84,7 +85,7 @@ def reg_livro2():
     ano = request.form.get('ano', '')
     edicao = request.form.get('edi', '')
 
-    livro = Livro(ISBN=ISBN, titulo=tit, autor=autor, editora=editora, ano=ano, requisitado=False)
+    livro = Livro(ISBN=ISBN, titulo=tit, autor=autor, editora=editora, ano=ano, requisitado='N')
 
     db.session.add(livro)
     db.session.commit()
@@ -101,6 +102,23 @@ def reg_req():
 @app.route('/reg_soc', methods=['GET'])
 def reg_soc():
     return render_template('reg_soc.html')
+
+@app.route('/reg_soc2', methods=['POST'])
+def reg_soc2():
+    cc = request.form.get('cc', '')
+    nome_soc = request.form.get('nome', '')
+    email = request.form.get('email', '')
+    data_n = request.form.get('dn', '')
+    morada = request.form.get('morada', '')
+    ano_inscri = request.form.get('ano_insc', '')
+    ativo = request.form.get('status', '')
+
+    socio = Socio(cc=cc, nome_soc=nome_soc, email=email, data_n=data_n, morada=morada, ano_inscri=ano_inscri, ativo=ativo)
+
+    db.session.add(socio)
+    db.session.commit()
+
+    return render_template('sucesso.html')
 
 
 @app.route('/ver_req', methods=['GET'])

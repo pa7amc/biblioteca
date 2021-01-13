@@ -3,7 +3,7 @@
 {%block content%}
 
 
-<form action="/reg_soc" method="post">
+<form action="/reg_soc2" method="post">
 
     <p>Cartão de Cidadão</p>
     <input type="cc" id="cc" name="cc" required="required" class="cc" placeholder="ex: 12345678">
@@ -12,7 +12,7 @@
     <input type="text" id="nome" name="nome" required="required" class="nome" >
 
     <p>Data de Nascimento</p>
-    <input type="date" id="dn" name="dn" required="required" class="dn" placeholder="dd/mm/yyyy">
+    <input type="text" id="dn" name="dn" required="required" class="dn" placeholder="dd/mm/yyyy">
 
     <p>Email</p>
     <input type="email" id="email" name="email" required="required" class="email" >
@@ -23,8 +23,8 @@
     <p>Ano de inscrição</p>
     <input type="number" id="ano_insc" name="ano_insc" required="required" class="ano_insc" >
 
-    <p>Status - ativo(1) ou inativo(0)</p>
-    <input type="number" id="status" name="status" required="required" class="status" >
+    <p>Ativo? - S/N</p>
+    <input type="text" id="status" name="status" required="required" class="status" >
     
     <input type="submit" class="sub" value="Registo do sócio">
 
