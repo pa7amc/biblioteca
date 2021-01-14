@@ -6,16 +6,24 @@
 <form action="/reg_req2" method="post">
 
     <p>Cartão de Cidadão</p>
-    <input type="cc" id="cc" name="cc" required="required" class="cc" placeholder="ex: 12345678">
+    <select name="ccs" id="ccs">
+    {% for socio in socios %}
+        <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
+    {% endfor %}
+    </select>
 
     <p>ISBN do livro</p>
-    <input type="text" id="isbn" name="isbn" required="required" class="isbn" >
+    <select name="isbns" id="isbns">
+        {% for livro in livros %}
+            <option value="{{ livro.ISBN }}">{{livro.ISBN}} - {{livro.titulo}}</option>
+        {% endfor %}
+        </select>
 
     <p>Data de Requisição</p>
-    <input type="date" id="dn" name="dt_req" required="required" class="dt_req" placeholder="dd/mm/yyyy">
+    <input type="text" id="dt_req" name="dt_req" required="required" class="dt_req" placeholder="dd/mm/yyyy">
 
     <p>Data de Entrega</p>
-    <input type="date" id="dn" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
+    <input type="text" id="dt_ent" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
 
     <input type="submit" class="sub" value="Registo do requisito">
 

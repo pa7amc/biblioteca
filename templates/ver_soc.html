@@ -3,7 +3,28 @@
 {%block content%}
 
 <!--mostrar sócios +dados-->
-
+<h3>Dados dos sócios</h3>
+<table style="width:100%">
+    <tr>
+      <th>CC</th>
+      <th>Nome </th>
+      <th>Email</th>
+      <th>Data de nascimento</th>
+      <th>Morada</th>
+      <th>Ano de inscrição</th>
+      <th>Ativo</th>
+    </tr>
+    {% for socio in socios %}
+    <tr>
+        <td>{{socio.cc}}</td>
+        <td>{{socio.nome_soc}}</td>
+        <td>{{socio.email}}</td>
+        <td>{{socio.data_n}}</td>
+        <td>{{socio.morada}}</td>
+        <td>{{socio.ano_inscri}}</td>
+        <td>{{socio.ativo}}</td>
+      {% endfor %}
+  </table>
 
 <hr/>
 <a href="/"><button type="button">Voltar</button></a>

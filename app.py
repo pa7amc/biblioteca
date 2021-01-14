@@ -3,6 +3,7 @@ from datetime import datetime
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, date
+from sqlalchemy import create_engine, Table, MetaData
 
 
 app = Flask(__name__)
@@ -19,7 +20,7 @@ class Livro(db.Model):
     autor = db.Column(db.String(70))
     editora = db.Column(db.String(70))
     ano = db.Column(db.Integer)
-    requisitado = db.Column(db.String(2), default='N')
+    requisitado = db.Column(db.String(1), default='N')
 
 class Socio(db.Model):
     __tablename__ = 'socio'
@@ -29,7 +30,7 @@ class Socio(db.Model):
     data_n = db.Column(db.String(10))
     morada = db.Column(db.String(150))
     ano_inscri = db.Column(db.Integer)
-    ativo = db.Column(db.String(2))
+    ativo = db.Column(db.String(1))
 
 class Campanha(db.Model):
     __tablename__ = 'campanha'
@@ -43,6 +44,7 @@ class Requisito(db.Model):
     cc_req = db.Column(db.Integer, db.ForeignKey('socio.cc'))
     data_req = db.Column(db.String(10))
     data_entr = db.Column(db.String(10))
+    completo = db.Column(db.String(1))
 
 
 class Socio_Camp(db.Model):
@@ -51,7 +53,7 @@ class Socio_Camp(db.Model):
     id_camp_sc = db.Column(db.Integer, db.ForeignKey('campanha.id_camp'))
     cc_sc = db.Column(db.Integer, db.ForeignKey('socio.cc'))
     #se comecou a ser socio naquela campanha - true, senao - false
-    novo = db.Column(db.String(2))
+    novo = db.Column(db.String(1))
 
 
 
@@ -63,13 +65,43 @@ def home():
 
 
 @app.route('/campanhas', methods=['GET'])
-def campanhas():
-    return render_template('campanhas.html')
+def campanhas():    
+    campanhas = Campanha.query.all()
+    return render_template('campanhas.html', campanhas=campanhas)
 
+@app.route('/reg_camp', methods=['POST'])
+def reg_camp():
+    nome_campa = request.form.get('campa', '')
+
+    campanha = Campanha(nome_camp=nome_campa)
+
+    db.session.add(campanha)
+    db.session.commit()
+
+    return render_template('sucesso.html')
 
 @app.route('/compl_req', methods=['GET'])
 def compl_req():
-    return render_template('compl_req.html')
+    reqs = Requisito.query.all()
+    livros = Livro.query.all()
+    return render_template('compl_req.html', reqs=reqs, livros=livros)
+
+@app.route('/compl_req2', methods=['POST'])
+def compl_req2():
+
+    ISBN = request.form.get('isbns', '')
+    data_entr = request.form.get('dt_ent', '')
+
+    # alterar 'requisitado' do livro para 'S'
+    db.session.query(Livro).filter(Livro.ISBN == ISBN).update({'requisitado': 'S'})
+    # alterar requisito para completo S
+    db.session.query().filter(Requisito.ISBN_req == ISBN).update({'completo': 'S'})
+    # update a data de entrega
+    db.session.query(Requisito).filter(Requisito.ISBN_req == ISBN).update({'data_entr': data_entr})
+
+    db.session.commit()
+
+    return render_template('sucesso.html')
 
 
 @app.route('/reg_livro', methods=['GET'])
@@ -83,7 +115,6 @@ def reg_livro2():
     autor = request.form.get('autor', '')
     editora = request.form.get('edit', '')
     ano = request.form.get('ano', '')
-    edicao = request.form.get('edi', '')
 
     livro = Livro(ISBN=ISBN, titulo=tit, autor=autor, editora=editora, ano=ano, requisitado='N')
 
@@ -92,11 +123,33 @@ def reg_livro2():
 
     return render_template('sucesso.html')
 
-
+@app.route('/ver_livros', methods=['GET'])
+def ver_livros():
+    livros = Livro.query.all()
+    return render_template('ver_livros.html', livros=livros)
 
 @app.route('/reg_req', methods=['GET'])
 def reg_req():
-    return render_template('reg_req.html')
+    livros = Livro.query.all()
+    socios = Socio.query.all()
+    return render_template('reg_req.html', livros=livros, socios=socios)
+
+@app.route('/reg_req2', methods=['POST'])
+def reg_req2():
+    ISBN_r = int(request.form.get('isbns', ''))
+    cc = int(request.form.get('ccs', ''))
+    data_req = request.form.get('dt_req', '')
+    data_entr = request.form.get('dt_ent', '')
+
+    req = Requisito(ISBN_req=ISBN_r, cc_req=cc, data_req=data_req, data_entr=data_entr, completo='N')
+
+    # alterar 'requisitado' do livro para 'S'
+    db.session.query(Livro).filter(Livro.ISBN == ISBN_r).update({'requisitado': 'S'})
+
+    db.session.add(req)
+    db.session.commit()
+
+    return render_template('sucesso.html')
 
 
 @app.route('/reg_soc', methods=['GET'])
@@ -123,18 +176,22 @@ def reg_soc2():
 
 @app.route('/ver_req', methods=['GET'])
 def ver_req():
-    return render_template('ver_req.html')
+    reqs = Requisito.query.all()
+    return render_template('ver_req.html', reqs=reqs)
 
 
 @app.route('/ver_soc', methods=['GET'])
 def ver_soc():
-    return render_template('ver_soc.html')
+    socios = Socio.query.all()
+    return render_template('ver_soc.html', socios=socios)
 
 
 
 
 
 
+
+###########################
 
 port = int(os.getenv("PORT", 5000))
 

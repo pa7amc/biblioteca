@@ -24,38 +24,40 @@
     <title>{% block title %} {%endblock%}</title>
   </head>
 
-
-
-
-
   <body>
-
     <header>
-        <a href="/"><h1>Biblioteca</h1></a>
+      <a href="/"><h1>Biblioteca</h1></a>
+      <p>
+        <a href="reg_livro"><button type="button">Registar livro</button></a>
+
+        <a href="ver_livros"><button type="button">Ver livros</button></a>
+
+        <a href="reg_soc"><button type="button">Registar sócio</button></a>
+
+        <a href="ver_soc"><button type="button">Ver sócios</button></a>
+
+        <a href="reg_req"><button type="button">Registar requisito</button></a>
+
+        <a href="compl_req"><button type="button">Fechar requisito</button></a>
+
+        <a href="ver_req"><button type="button">Ver requisitos</button></a>
+
+        <a href="campanhas"><button type="button">Campanhas</button></a>
+      </p>
     </header>
- 
-   
+
     <main>
+      <section id="cont">
+        <img
+          class="bgpic"
+          src="{{ url_for('static', filename = 'imgs/Library.png') }}"
+          alt="logo"
+        />
 
+        <hr />
 
-        <section id="cont">
-
-            <img class="bgpic" src="{{ url_for('static', filename = 'imgs/Library.png') }}" alt="logo" />
-
-            <hr/>
-
-            <div class="conts">
-                {%block content%} {%endblock%}
-
-            </div>
-
-        </section>
+        <div class="conts">{%block content%} {%endblock%}</div>
+      </section>
     </main>
-
-
-
-
   </body>
-
-
 </html>

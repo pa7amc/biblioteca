@@ -4,6 +4,30 @@
 
 <!--mostrar campanhas  e quando selecionada, mostra sócios aderentes e se já eram sócios ou se ficaram naquela campanha-->
 
+<h3>Campanhas</h3>
+<table style="width:100%">
+    <tr>
+      <th>ID Campanha</th>
+      <th>Nome</th>
+    </tr>
+    {% for camp in campanhas %}
+    <tr>
+        <td>{{camp.id_camp}}</td>
+        <td>{{camp.nome_camp}}</td>
+      {% endfor %}
+  </table>
+
+
+
+<hr/>
+<h2>Adicionar campanha</h2>
+<form action="/reg_camp" method="post">
+    <p>Nome da Campanha</p>
+    <input type="text" id="campa" name="campa" required="required" class="campa" >
+
+    <input type="submit" class="sub" value="Registo da Campanha">
+
+</form>
 
 <hr/>
 <a href="/"><button type="button">Voltar</button></a>
