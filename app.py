@@ -57,17 +57,37 @@ class Socio_Camp(db.Model):
 
 
 
-
-
 @app.route('/', methods=['GET'])
 def home():
     return render_template('home.html')
+
+
 
 
 @app.route('/campanhas', methods=['GET'])
 def campanhas():    
     campanhas = Campanha.query.all()
     return render_template('campanhas.html', campanhas=campanhas)
+
+@app.route('/socio_camp', methods=['GET'])
+def socio_camp():    
+    campanhas = Campanha.query.all()
+    socios = Socio.query.all()
+    sc = Socio_Camp.query.all()
+    return render_template('socio_camp.html', campanhas=campanhas, sc=sc, socios=socios)
+
+@app.route('/socio_camp2', methods=['POST'])
+def socio_camp2():    
+    id_campa = request.form.get('campa', '')
+    cc_campa = request.form.get('ccs', '')
+    novo = request.form.get('novo', '')
+
+    sc = Socio_Camp(id_camp_sc=id_campa, cc_sc=cc_campa, novo=novo)
+
+    db.session.add(sc)
+    db.session.commit()
+
+    return render_template('sucesso.html')
 
 @app.route('/reg_camp', methods=['POST'])
 def reg_camp():
@@ -88,14 +108,13 @@ def compl_req():
 
 @app.route('/compl_req2', methods=['POST'])
 def compl_req2():
-
     ISBN = request.form.get('isbns', '')
     data_entr = request.form.get('dt_ent', '')
 
     # alterar 'requisitado' do livro para 'S'
     db.session.query(Livro).filter(Livro.ISBN == ISBN).update({'requisitado': 'S'})
     # alterar requisito para completo S
-    db.session.query().filter(Requisito.ISBN_req == ISBN).update({'completo': 'S'})
+    db.session.query(Requisito).filter(Requisito.ISBN_req == ISBN).update({'completo': 'S'})
     # update a data de entrega
     db.session.query(Requisito).filter(Requisito.ISBN_req == ISBN).update({'data_entr': data_entr})
 

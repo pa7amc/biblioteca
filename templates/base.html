@@ -16,10 +16,10 @@
       href="{{ url_for('static', filename = 'styles.css') }}"
     />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/imgs/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="static/imgs/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="static/imgs/favicon-16x16.png" />
+    <link rel="manifest" href="static/imgs/site.webmanifest" />
 
     <title>{% block title %} {%endblock%}</title>
   </head>
@@ -42,6 +42,8 @@
 
         <a href="ver_req"><button type="button">Ver requisitos</button></a>
 
+        <a href="socio_camp"><button type="button">Adesões</button></a>
+
         <a href="campanhas"><button type="button">Campanhas</button></a>
       </p>
     </header>
@@ -54,7 +56,6 @@
           alt="logo"
         />
 
-        <hr />
 
         <div class="conts">{%block content%} {%endblock%}</div>
       </section>

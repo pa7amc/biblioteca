@@ -1,0 +1,53 @@
+{% extends "base.html"%} {%block title %}Adesões Campanhas -
+Biblioteca{%endblock%} {%block content%}
+
+<!--mostrar campanhas  e quando selecionada, 
+  mostra sócios aderentes e se já eram sócios ou se ficaram naquela campanha-->
+
+<h3>Adesões</h3>
+<table style="width: 100%">
+    <tr>
+        <th>ID Adesão</th>
+        <th>Campanha</th>
+        <th>Sócio</th>
+        <th>Ficou sócio na campanha?</th>
+    </tr>
+    {% for sc in sc %}
+    <tr>
+        <td>{{sc.id_sc}}</td>
+        <td>{{sc.id_camp_sc}}</td>
+        <td>{{sc.cc_sc}}</td>
+        <td>{{sc.novo}}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+<hr />
+<h2>Adicionar adesão</h2>
+<form action="/socio_camp2" method="post">
+    <p>Campanha</p>
+    <select name="campa" id="campa">
+        {% for camp in campanhas %}
+        <option value="{{ camp.id_camp}}">
+            {{camp.id_camp}} - {{camp.nome_camp}}
+        </option>
+        {% endfor %}
+    </select>
+
+    <p>Cartão de Cidadão</p>
+    <select name="ccs" id="ccs">
+    {% for socio in socios %}
+        <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
+    {% endfor %}
+    </select>
+
+    <p>Ficou sócio na campanha? - S/N</p>
+    <input type="text" id="novo" name="novo" required="required" class="novo" >
+
+    <input type="submit" class="sub" value="Registo da adesão" />
+</form>
+
+<hr />
+<a href="/"><button type="button">Home</button></a>
+
+{%endblock%}
