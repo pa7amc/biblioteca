@@ -1,0 +1,93 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D2D5E4;
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #D2D5E4;
+    text-align: center;
+    padding-bottom: 1rem;
+
+}
+
+form {
+    text-align: center;
+    width: auto;
+}
+
+#nav{
+    width: auto;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
+
+#cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Ubuntu', sans-serif;
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+}
+
+.sub {
+    border-radius: 0.5rem;
+    margin: 2rem;
+    width: auto;
+}
+
+.conts {
+    padding: 0 0 5rem 0;
+    text-align: center;
+}
+
+.botoes{
+    border-radius: 0.5rem;
+    width: auto;
+}
+
+.bgpic{
+    margin: auto;
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: #3d002e;
+}
+
+a:hover {
+
+    color: #e9e9fc;
+}
+
+p {
+    color: #202022;
+}
+
+.final{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@media only screen and (max-width: 350px),
+screen and (orientation: portrait) {
+    .bgpic {
+        max-width: 100%;
+    }
+}

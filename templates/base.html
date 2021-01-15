@@ -22,32 +22,40 @@
     <a href="/">
       <h1>Biblioteca</h1>
     </a>
-    <p>
-      <a href="reg_livro"><button type="button">Registar livro</button></a>
+    <section id="nav">
+      <div>
+        <a href="reg_livro"><button type="button" class="botoes">Registar livro</button></a>
 
-      <a href="ver_livros"><button type="button">Ver livros</button></a>
+        <a href="ver_livros"><button type="button" class="botoes">Ver livros</button></a>
 
-      <a href="reg_soc"><button type="button">Registar sócio</button></a>
+        <a href="reg_soc"><button type="button" class="botoes">Registar sócio</button></a>
 
-      <a href="ver_soc"><button type="button">Ver sócios</button></a>
+        <a href="ver_soc"><button type="button" class="botoes">Ver sócios</button></a>
 
-      <a href="del_soc"><button type="button">Remover sócios</button></a>
+        <a href="del_soc"><button type="button" class="botoes">Remover sócios</button></a>
+      </div>
+      <div>
+        <a href="reg_req"><button type="button" class="botoes">Registar requisito</button></a>
 
-      <a href="reg_req"><button type="button">Registar requisito</button></a>
+        <a href="compl_req"><button type="button" class="botoes">Fechar requisito</button></a>
 
-      <a href="compl_req"><button type="button">Fechar requisito</button></a>
+        <a href="ver_req"><button type="button" class="botoes">Ver requisitos</button></a>
 
-      <a href="ver_req"><button type="button">Ver requisitos</button></a>
+        <a href="socio_camp"><button type="button" class="botoes">Adesões</button></a>
 
-      <a href="socio_camp"><button type="button">Adesões</button></a>
+        <a href="campanhas"><button type="button" class="botoes">Campanhas</button></a>
+      </div>
 
-      <a href="campanhas"><button type="button">Campanhas</button></a>
-    </p>
+    </section>
+    <img class="bgpic" src="{{ url_for('static', filename = 'imgs/Library.png') }}" alt="logo" />
+
   </header>
+
+  <hr />
 
   <main>
     <section id="cont">
-      <img class="bgpic" src="{{ url_for('static', filename = 'imgs/Library.png') }}" alt="logo" />
+
 
 
       <div class="conts">{%block content%} {%endblock%}</div>

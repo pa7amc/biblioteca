@@ -2,29 +2,28 @@
 {%block title %}Requisitos - Biblioteca{%endblock%}
 {%block content%}
 
-<!--mostrar requisitos + dados-->
 <h3>Requisitos</h3>
 <table style="width:100%">
-    <tr>
-      <th>ID</th>
-      <th>ISBN </th>
-      <th>CC Sócio</th>
-      <th>Data de requisito</th>
-      <th>Data de entrega</th>
-      <th>Completo</th>
-    </tr>
-    {% for req in reqs %}
-    <tr>
-        <td>{{req.id_req}}</td>
-        <td>{{req.ISBN_req}}</td>
-        <td>{{req.cc_req}}</td>
-        <td>{{req.data_req}}</td>
-        <td>{{req.data_entr}}</td>
-        <td>{{req.completo}}</td>
-      {% endfor %}
-  </table>
+  <tr>
+    <th>ID</th>
+    <th>ISBN </th>
+    <th>CC Sócio</th>
+    <th>Data de requisito</th>
+    <th>Data de entrega</th>
+    <th>Completo</th>
+  </tr>
+  {% for req in reqs %}
+  <tr>
+    <td>{{req.id_req}}</td>
+    <td>{{req.ISBN_req}}</td>
+    <td>{{req.cc_req}}</td>
+    <td>{{req.data_req}}</td>
+    <td>{{req.data_entr}}</td>
+    <td>{{req.completo}}</td>
+    {% endfor %}
+</table>
 
-<hr/>
-<a href="/"><button type="button">Home</button></a>
+<hr />
+<a href="/" class="abotoes"><button type="button" class="botoes">Home</button></a>
 
 {%endblock%}

@@ -1,8 +1,6 @@
 {% extends "base.html"%} {%block title %}Adesões Campanhas -
 Biblioteca{%endblock%} {%block content%}
 
-<!--mostrar campanhas  e quando selecionada, 
-  mostra sócios aderentes e se já eram sócios ou se ficaram naquela campanha-->
 
 <h3>Adesões</h3>
 <table style="width: 100%">
@@ -36,18 +34,18 @@ Biblioteca{%endblock%} {%block content%}
 
     <p>Cartão de Cidadão</p>
     <select name="ccs" id="ccs">
-    {% for socio in socios %}
+        {% for socio in socios %}
         <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
-    {% endfor %}
+        {% endfor %}
     </select>
 
     <p>Ficou sócio na campanha? - S/N</p>
-    <input type="text" id="novo" name="novo" required="required" class="novo" >
+    <input type="text" id="novo" name="novo" required="required" class="novo">
 
-    <input type="submit" class="sub" value="Registo da adesão" />
+    <input type="submit" class="sub final" value="Registo da adesão" />
 </form>
 
 <hr />
-<a href="/"><button type="button">Home</button></a>
+<a href="/" class="abotoes"><button type="button" class="botoes">Home</button></a>
 
 {%endblock%}

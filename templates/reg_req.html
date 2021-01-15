@@ -7,17 +7,17 @@
 
     <p>Cartão de Cidadão</p>
     <select name="ccs" id="ccs">
-    {% for socio in socios %}
+        {% for socio in socios %}
         <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
-    {% endfor %}
+        {% endfor %}
     </select>
 
     <p>ISBN do livro</p>
     <select name="isbns" id="isbns">
         {% for livro in livros %}
-            <option value="{{ livro.ISBN }}">{{livro.ISBN}} - {{livro.titulo}}</option>
+        <option value="{{ livro.ISBN }}">{{livro.ISBN}} - {{livro.titulo}}</option>
         {% endfor %}
-        </select>
+    </select>
 
     <p>Data de Requisição</p>
     <input type="text" id="dt_req" name="dt_req" required="required" class="dt_req" placeholder="dd/mm/yyyy">
@@ -25,13 +25,13 @@
     <p>Data de Entrega</p>
     <input type="text" id="dt_ent" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
 
-    <input type="submit" class="sub" value="Registo do requisito">
+    <input type="submit" class="sub final" value="Registo do requisito">
 
     <!-- mudar estado livro para 1-->
 
 </form>
 
-<hr/>
-<a href="/"><button type="button">Home</button></a>
+<hr />
+<a href="/" class="abotoes"><button type="button" class="botoes">Home</button></a>
 
 {%endblock%}
