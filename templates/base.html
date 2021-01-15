@@ -1,64 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename = 'styles.css') }}"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-    <link rel="apple-touch-icon" sizes="180x180" href="static/imgs/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="static/imgs/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="static/imgs/favicon-16x16.png" />
-    <link rel="manifest" href="static/imgs/site.webmanifest" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}" />
 
-    <title>{% block title %} {%endblock%}</title>
-  </head>
+  <link rel="apple-touch-icon" sizes="180x180" href="static/imgs/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="static/imgs/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="static/imgs/favicon-16x16.png" />
+  <link rel="manifest" href="static/imgs/site.webmanifest" />
 
-  <body>
-    <header>
-      <a href="/"><h1>Biblioteca</h1></a>
-      <p>
-        <a href="reg_livro"><button type="button">Registar livro</button></a>
+  <title>{% block title %} {%endblock%}</title>
+</head>
 
-        <a href="ver_livros"><button type="button">Ver livros</button></a>
+<body>
+  <header>
+    <a href="/">
+      <h1>Biblioteca</h1>
+    </a>
+    <p>
+      <a href="reg_livro"><button type="button">Registar livro</button></a>
 
-        <a href="reg_soc"><button type="button">Registar sócio</button></a>
+      <a href="ver_livros"><button type="button">Ver livros</button></a>
 
-        <a href="ver_soc"><button type="button">Ver sócios</button></a>
+      <a href="reg_soc"><button type="button">Registar sócio</button></a>
 
-        <a href="reg_req"><button type="button">Registar requisito</button></a>
+      <a href="ver_soc"><button type="button">Ver sócios</button></a>
 
-        <a href="compl_req"><button type="button">Fechar requisito</button></a>
+      <a href="del_soc"><button type="button">Remover sócios</button></a>
 
-        <a href="ver_req"><button type="button">Ver requisitos</button></a>
+      <a href="reg_req"><button type="button">Registar requisito</button></a>
 
-        <a href="socio_camp"><button type="button">Adesões</button></a>
+      <a href="compl_req"><button type="button">Fechar requisito</button></a>
 
-        <a href="campanhas"><button type="button">Campanhas</button></a>
-      </p>
-    </header>
+      <a href="ver_req"><button type="button">Ver requisitos</button></a>
 
-    <main>
-      <section id="cont">
-        <img
-          class="bgpic"
-          src="{{ url_for('static', filename = 'imgs/Library.png') }}"
-          alt="logo"
-        />
+      <a href="socio_camp"><button type="button">Adesões</button></a>
+
+      <a href="campanhas"><button type="button">Campanhas</button></a>
+    </p>
+  </header>
+
+  <main>
+    <section id="cont">
+      <img class="bgpic" src="{{ url_for('static', filename = 'imgs/Library.png') }}" alt="logo" />
 
 
-        <div class="conts">{%block content%} {%endblock%}</div>
-      </section>
-    </main>
-  </body>
+      <div class="conts">{%block content%} {%endblock%}</div>
+    </section>
+  </main>
+</body>
+
 </html>

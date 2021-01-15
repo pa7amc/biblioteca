@@ -160,6 +160,18 @@ def reg_req2():
     data_req = request.form.get('dt_req', '')
     data_entr = request.form.get('dt_ent', '')
 
+    #validar, so socio ativo pode requisitar
+    socio1 = db.session.query(Socio.ativo).filter_by(cc=cc).first()
+
+    livro1 = db.session.query(Livro.requisitado).filter_by(ISBN=ISBN_r).first()
+
+    if socio1.ativo == "N":
+        return render_template('invalido.html', cc=cc)
+
+    if livro1.requisitado == "S":
+        return render_template('invalido_livro.html', ISBN=ISBN_r)
+
+
     req = Requisito(ISBN_req=ISBN_r, cc_req=cc, data_req=data_req, data_entr=data_entr, completo='N')
 
     # alterar 'requisitado' do livro para 'S'
@@ -205,8 +217,25 @@ def ver_soc():
     return render_template('ver_soc.html', socios=socios)
 
 
+@app.route('/altera_soc', methods=['POST'])
+def altera_soc():
+    cc = request.form.get('ccs', '')
+    ativo = request.form.get('status', '')
+    db.session.query(Socio).filter(Socio.cc == cc).update({'ativo': ativo})
+    db.session.commit()
+    return render_template('sucesso.html')
 
+@app.route('/del_soc', methods=['GET'])
+def del_soc():
+    socios = Socio.query.all()
+    return render_template('del_soc.html', socios=socios)
 
+@app.route('/del_soc2', methods=['POST'])
+def del_soc2():
+    cc = request.form.get('ccs', '')
+    Socio.query.filter_by(cc=cc).delete()
+    db.session.commit()
+    return render_template('sucesso.html')
 
 
 

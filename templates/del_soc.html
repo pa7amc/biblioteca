@@ -1,0 +1,24 @@
+{% extends "base.html"%} {%block title %}Adesões Campanhas -
+Biblioteca{%endblock%} {%block content%}
+
+
+
+<hr />
+<h2>Remover sócio</h2>
+<form action="/del_soc2" method="post">
+
+
+    <p>Cartão de Cidadão</p>
+    <select name="ccs" id="ccs">
+        {% for socio in socios %}
+        <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" class="sub" value="Remover" />
+</form>
+
+<hr />
+<a href="/"><button type="button">Home</button></a>
+
+{%endblock%}

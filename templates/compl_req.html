@@ -1,5 +1,3 @@
-
-
 {% extends "base.html"%}
 {%block title %}Fechar requisito - Biblioteca{%endblock%}
 {%block content%}
@@ -10,29 +8,27 @@
     <p>ISBN do livro</p>
     <select name="isbns" id="isbns">
         {% for livro in livros %}
-            <option value="{{ livro.ISBN }}">{{livro.ISBN}} - {{livro.titulo}}</option>
+        <option value="{{ livro.ISBN }}">{{livro.ISBN}} - {{livro.titulo}}</option>
         {% endfor %}
-        </select>
+    </select>
 
     <p>Data de Entrega</p>
     <input type="text" id="dt_ent" name="dt_ent" required="required" class="dt_ent" placeholder="dd/mm/yyyy">
 
     <input type="submit" class="sub" value="Fecho do requisito">
-<!--mudar estado livro para requisitado S-->
-<!--mudar estado do requisito para completo-S-->
-<!--update na data de entrega-->
+
 
 </form>
-<hr/>
+<hr />
 <h3>Requisitos</h3>
 <table style="width:100%">
     <tr>
-      <th>ID Requisito</th>
-      <th>ISBN</th>
-      <th>CC</th>
-      <th>Data de requisição</th>
-      <th>Data de entrega</th>
-      <th>Completo</th>
+        <th>ID Requisito</th>
+        <th>ISBN</th>
+        <th>CC</th>
+        <th>Data de requisição</th>
+        <th>Data de entrega</th>
+        <th>Completo</th>
     </tr>
     {% for req in reqs %}
     <tr>
@@ -42,10 +38,10 @@
         <td>{{req.data_req}}</td>
         <td>{{req.data_entr}}</td>
         <td>{{req.completo}}</td>
-      {% endfor %}
-  </table>
+        {% endfor %}
+</table>
 
-<hr/>
+<hr />
 <a href="/"><button type="button">Home</button></a>
 
 {%endblock%}

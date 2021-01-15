@@ -5,25 +5,25 @@
 <!--mostrar sócios +dados-->
 <h3>Livros</h3>
 <table style="width:100%">
-    <tr>
-      <th>ISBN</th>
-      <th>Título </th>
-      <th>Autor</th>
-      <th>Editora</th>
-      <th>Ano</th>
-      <th>Requisitado</th>
-    </tr>
-    {% for livro in livros %}
-    <tr>
-        <td>{{livro.ISBN}}</td>
-        <td>{{livro.titulo}}</td>
-        <td>{{livro.autor}}</td>
-        <td>{{livro.editora}}</td>
-        <td>{{livro.ano}}</td>
-        <td>{{livro.Requisitado}}</td>
-      {% endfor %}
-  </table>
+  <tr>
+    <th>ISBN</th>
+    <th>Título </th>
+    <th>Autor</th>
+    <th>Editora</th>
+    <th>Ano</th>
+    <th>Requisitado</th>
+  </tr>
+  {% for livro in livros %}
+  <tr>
+    <td>{{livro.ISBN}}</td>
+    <td>{{livro.titulo}}</td>
+    <td>{{livro.autor}}</td>
+    <td>{{livro.editora}}</td>
+    <td>{{livro.ano}}</td>
+    <td>{{livro.requisitado}}</td>
+    {% endfor %}
+</table>
 
-<hr/>
+<hr />
 <a href="/"><button type="button">Home</button></a>
 {%endblock%}

@@ -5,27 +5,48 @@
 <!--mostrar sócios +dados-->
 <h3>Dados dos sócios</h3>
 <table style="width:100%">
-    <tr>
-      <th>CC</th>
-      <th>Nome </th>
-      <th>Email</th>
-      <th>Data de nascimento</th>
-      <th>Morada</th>
-      <th>Ano de inscrição</th>
-      <th>Ativo</th>
-    </tr>
-    {% for socio in socios %}
-    <tr>
-        <td>{{socio.cc}}</td>
-        <td>{{socio.nome_soc}}</td>
-        <td>{{socio.email}}</td>
-        <td>{{socio.data_n}}</td>
-        <td>{{socio.morada}}</td>
-        <td>{{socio.ano_inscri}}</td>
-        <td>{{socio.ativo}}</td>
-      {% endfor %}
-  </table>
+  <tr>
+    <th>CC</th>
+    <th>Nome </th>
+    <th>Email</th>
+    <th>Data de nascimento</th>
+    <th>Morada</th>
+    <th>Ano de inscrição</th>
+    <th>Ativo</th>
+  </tr>
+  {% for socio in socios %}
+  <tr>
+    <td>{{socio.cc}}</td>
+    <td>{{socio.nome_soc}}</td>
+    <td>{{socio.email}}</td>
+    <td>{{socio.data_n}}</td>
+    <td>{{socio.morada}}</td>
+    <td>{{socio.ano_inscri}}</td>
+    <td>{{socio.ativo}}</td>
+    {% endfor %}
+</table>
 
-<hr/>
+<h3>Editar estado do sócio</h3>
+<form action="/altera_soc" method="post">
+
+  <p>Cartão de Cidadão</p>
+  <select name="ccs" id="ccs">
+    {% for socio in socios %}
+    <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
+    {% endfor %}
+  </select>
+
+  <p>Ativo? - S/N</p>
+  <select name="status" id="status">
+    <option value="S">S</option>
+    <option value="N">N</option>
+
+  </select>
+
+  <input type="submit" class="sub" value="Alterar estado">
+
+</form>
+
+<hr />
 <a href="/"><button type="button">Home</button></a>
 {%endblock%}
