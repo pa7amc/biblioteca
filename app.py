@@ -44,7 +44,7 @@ class Requisito(db.Model):
     cc_req = db.Column(db.Integer, db.ForeignKey('socio.cc'))
     data_req = db.Column(db.String(10))
     data_entr = db.Column(db.String(10))
-    completo = db.Column(db.String(1))
+    completo = db.Column(db.String(1), default='S')
 
 
 class Socio_Camp(db.Model):

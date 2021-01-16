@@ -1,29 +1,30 @@
-{% extends "base.html"%}
-{%block title %}Livros - Biblioteca{%endblock%}
-{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
-{%block content%}
+{% extends "base.html"%} {%block title %}Livros - Biblioteca{%endblock%} {%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%} {%block content%}
 
 <h3>Livros</h3>
 <table style="width:100%" class="pure-table pure-table-horizontal">
-  <tr>
-    <th>ISBN</th>
-    <th>Título </th>
-    <th>Autor</th>
-    <th>Editora</th>
-    <th>Ano</th>
-    <th>Requisitado</th>
-  </tr>
-  {% for livro in livros %}
-  <tr>
-    <td>{{livro.ISBN}}</td>
-    <td>{{livro.titulo}}</td>
-    <td>{{livro.autor}}</td>
-    <td>{{livro.editora}}</td>
-    <td>{{livro.ano}}</td>
-    <td>{{livro.requisitado}}</td>
-    {% endfor %}
+    <tr>
+        <th>ISBN</th>
+        <th>Título </th>
+        <th>Autor</th>
+        <th>Editora</th>
+        <th>Ano</th>
+        <th>Requisitado</th>
+    </tr>
+    {% for livro in livros %}
+    <tr>
+        <td>{{livro.ISBN}}</td>
+        <td>{{livro.titulo}}</td>
+        <td>{{livro.autor}}</td>
+        <td>{{livro.editora}}</td>
+        <td>{{livro.ano}}</td>
+        <td>{{livro.requisitado}}</td>
+        {% endfor %}
 </table>
 
 <hr />
-<a href="/" class="abotoes"><button type="button" class="botoes">Home</button></a>
+<div class="dropdown">
+    <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
+    </li>
+</div>
+
 {%endblock%}

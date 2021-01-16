@@ -2,75 +2,92 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
-    integrity="sha384-4ZPLezkTZTsojWFhpdFembdzFudphhoOzIunR1wH6g1WQDzCAiPvDyitaK67mp0+" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-4ZPLezkTZTsojWFhpdFembdzFudphhoOzIunR1wH6g1WQDzCAiPvDyitaK67mp0+" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'styles.css') }}" />
 
-  <link rel="apple-touch-icon" sizes="180x180" href="static/imgs/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="static/imgs/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="static/imgs/favicon-16x16.png" />
-  <link rel="manifest" href="static/imgs/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/imgs/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="static/imgs/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="static/imgs/favicon-16x16.png" />
+    <link rel="manifest" href="static/imgs/site.webmanifest" />
 
-  <title>{% block title %} {%endblock%}</title>
+    <title>{% block title %} {%endblock%}</title>
 </head>
 
 <body>
-  <header>
-    <a href="/">
-      <h1>Biblioteca</h1>
-    </a>
-    <section id="nav">
-      <div>
-        <a href="reg_livro"><button type="button" class="botoes">Registar livro</button></a>
+    <header>
+        <section id="nav">
+            <div class="menu">
+                <ul>
+                    <div class="dropdown">
+                        <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
+                        </li>
+                    </div>
+                    <div class="dropdown">
+                        <li><button class="dropbtn botoes">Livros</button>
+                            <div class="dropdown-content">
+                                <a href="reg_livro"><button type="button" class="botoes">Registar livro</button></a>
+                                <a href="ver_livros"><button type="button" class="botoes">Ver livros</button></a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="dropdown">
+                        <li><button class="dropbtn botoes">Sócios</button>
+                            <div class="dropdown-content">
+                                <a href="reg_soc"><button type="button" class="botoes">Registar sócio</button></a>
+                                <a href="ver_soc"><button type="button" class="botoes">Ver sócios</button></a>
+                                <a href="del_soc"><button type="button" class="botoes">Remover sócios</button></a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="dropdown">
+                        <li><button class="dropbtn botoes">Requisitos</button>
+                            <div class="dropdown-content">
+                                <a href="reg_req"><button type="button" class="botoes">Registar requisito</button></a>
+                                <a href="compl_req"><button type="button" class="botoes">Fechar requisito</button></a>
+                                <a href="ver_req"><button type="button" class="botoes">Ver requisitos</button></a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="dropdown">
+                        <li><a href="campanhas"><button class="dropbtn botoes ">Campanhas</button></a>
+                        </li>
+                    </div>
+                    <div class="dropdown">
+                        <li><a href="socio_camp"><button class="dropbtn botoes">Adesões</button></a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
 
-        <a href="ver_livros"><button type="button" class="botoes">Ver livros</button></a>
+        </section>
 
-        <a href="reg_soc"><button type="button" class="botoes">Registar sócio</button></a>
-
-        <a href="ver_soc"><button type="button" class="botoes">Ver sócios</button></a>
-
-        <a href="del_soc"><button type="button" class="botoes">Remover sócios</button></a>
-      </div>
-      <div>
-        <a href="reg_req"><button type="button" class="botoes">Registar requisito</button></a>
-
-        <a href="compl_req"><button type="button" class="botoes">Fechar requisito</button></a>
-
-        <a href="ver_req"><button type="button" class="botoes">Ver requisitos</button></a>
-
-        <a href="socio_camp"><button type="button" class="botoes">Adesões</button></a>
-
-        <a href="campanhas"><button type="button" class="botoes">Campanhas</button></a>
-      </div>
-
-    </section>
-
-    {%block pic%} {%endblock%}
+        {%block pic%} {%endblock%}
 
 
-  </header>
-
-  <hr />
-
-  <main>
-    <section id="cont">
+    </header>
 
 
 
-      <div class="conts">{%block content%} {%endblock%}</div>
-    </section>
-  </main>
+    <main>
+
+        <section id="cont">
+
+
+
+            <div class="conts">
+                <hr />{%block content%} {%endblock%}</div>
+        </section>
+    </main>
 </body>
 
 </html>

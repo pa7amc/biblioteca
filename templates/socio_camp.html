@@ -1,9 +1,4 @@
-{% extends "base.html"%} {%block title %}Adesões Campanhas -
-Biblioteca{%endblock%}
-{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
-
-
-{%block content%}
+{% extends "base.html"%} {%block title %}Adesões Campanhas - Biblioteca{%endblock%} {%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%} {%block content%}
 
 
 <h3>Adesões</h3>
@@ -50,6 +45,9 @@ Biblioteca{%endblock%}
 </form>
 
 <hr />
-<a href="/" class="abotoes"><button type="button" class="botoes">Home</button></a>
+<div class="dropdown">
+    <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
+    </li>
+</div>
 
 {%endblock%}
