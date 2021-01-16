@@ -52,7 +52,7 @@ class Socio_Camp(db.Model):
     id_sc = db.Column(db.Integer, primary_key=True)
     id_camp_sc = db.Column(db.Integer, db.ForeignKey('campanha.id_camp'))
     cc_sc = db.Column(db.Integer, db.ForeignKey('socio.cc'))
-    #se comecou a ser socio naquela campanha - 'S', senao - 'N'
+    #se comecou a ser socio naquela campanha - true, senao - false
     novo = db.Column(db.String(1))
 
 
@@ -64,7 +64,6 @@ class Socio_Camp(db.Model):
 def home():
     return render_template('home.html')
 
-########### ####################      CAMPANHA
 #Campanha
 @app.route('/campanhas', methods=['GET'])
 def campanhas():    
@@ -72,7 +71,6 @@ def campanhas():
     return render_template('campanhas.html', campanhas=campanhas)
 
 
-#Regista campanha
 @app.route('/reg_camp', methods=['POST'])
 def reg_camp():
     nome_campa = request.form.get('campa', '')
@@ -80,11 +78,10 @@ def reg_camp():
 
     db.session.add(campanha)
     db.session.commit()
+
     return render_template('sucesso.html')
 
 
-########### ####################      ADESAO
-#Pagina adesao
 @app.route('/socio_camp', methods=['GET'])
 def socio_camp():    
     campanhas = Campanha.query.all()
@@ -93,7 +90,6 @@ def socio_camp():
     return render_template('socio_camp.html', campanhas=campanhas, sc=sc, socios=socios)
 
 
-#Registar adesao
 @app.route('/socio_camp2', methods=['POST'])
 def socio_camp2():    
     id_campa = request.form.get('campa', '')
@@ -104,10 +100,10 @@ def socio_camp2():
 
     db.session.add(sc)
     db.session.commit()
+
     return render_template('sucesso.html')
 
 
-########### ####################      REQUISITO
 #Requisito
 @app.route('/reg_req', methods=['GET'])
 def reg_req():
@@ -116,21 +112,21 @@ def reg_req():
     return render_template('reg_req.html', livros=livros, socios=socios)
 
 
-#Registar requisito
 @app.route('/reg_req2', methods=['POST'])
 def reg_req2():
     ISBN_r = int(request.form.get('isbns', ''))
     cc = int(request.form.get('ccs', ''))
     data_req = request.form.get('dt_req', '')
     data_entr = request.form.get('dt_ent', '')
-    
-    socio1 = db.session.query(Socio.ativo).filter_by(cc=cc).first()
-    livro1 = db.session.query(Livro.requisitado).filter_by(ISBN=ISBN_r).first()
 
     #validar, so socio ativo pode requisitar
+    socio1 = db.session.query(Socio.ativo).filter_by(cc=cc).first()
+    #validar sse o livro estiver livre
+    livro1 = db.session.query(Livro.requisitado).filter_by(ISBN=ISBN_r).first()
+
     if socio1.ativo == "N":
         return render_template('invalido.html', cc=cc)
-    #validar sse o livro estiver livre
+
     if livro1.requisitado == "S":
         return render_template('invalido_livro.html', ISBN=ISBN_r)
 
@@ -141,10 +137,10 @@ def reg_req2():
 
     db.session.add(req)
     db.session.commit()
+
     return render_template('sucesso.html')
 
 
-#Pagina fechar requisito
 @app.route('/compl_req', methods=['GET'])
 def compl_req():
     reqs = Requisito.query.all()
@@ -152,7 +148,6 @@ def compl_req():
     return render_template('compl_req.html', reqs=reqs, livros=livros)
 
 
-#Fechar requisito
 @app.route('/compl_req2', methods=['POST'])
 def compl_req2():
     ISBN = request.form.get('isbns', '')
@@ -160,29 +155,28 @@ def compl_req2():
 
     # alterar 'requisitado' do livro para 'N'
     db.session.query(Livro).filter(Livro.ISBN == ISBN).update({'requisitado': 'N'})
-    # alterar requisito para completo 'S'
+    # alterar requisito para completo S
     db.session.query(Requisito).filter(Requisito.ISBN_req == ISBN).update({'completo': 'S'})
-    # update na data de entrega
+    # update a data de entrega
     db.session.query(Requisito).filter(Requisito.ISBN_req == ISBN).update({'data_entr': data_entr})
 
     db.session.commit()
+
     return render_template('sucesso.html')
 
-#Ver requisitos
+
 @app.route('/ver_req', methods=['GET'])
 def ver_req():
     reqs = Requisito.query.all()
     return render_template('ver_req.html', reqs=reqs)
 
 
-########### ####################      LIVRO
 #Livro
 @app.route('/reg_livro', methods=['GET'])
 def reg_livro():
     return render_template('reg_livro.html')
 
 
-#Registo do livro
 @app.route('/reg_livro2', methods=['POST'])
 def reg_livro2():
     ISBN = request.form.get('isbn', '')
@@ -195,24 +189,22 @@ def reg_livro2():
 
     db.session.add(livro)
     db.session.commit()
+
     return render_template('sucesso.html')
 
 
-#Ver livros
 @app.route('/ver_livros', methods=['GET'])
 def ver_livros():
     livros = Livro.query.all()
     return render_template('ver_livros.html', livros=livros)
 
 
-########### ####################      SOCIO
-#Pagina registo Socio
+#Socio
 @app.route('/reg_soc', methods=['GET'])
 def reg_soc():
     return render_template('reg_soc.html')
 
 
-#Registar socio
 @app.route('/reg_soc2', methods=['POST'])
 def reg_soc2():
     cc = request.form.get('cc', '')
@@ -227,17 +219,16 @@ def reg_soc2():
 
     db.session.add(socio)
     db.session.commit()
+
     return render_template('sucesso.html')
 
 
-#Ver socios
 @app.route('/ver_soc', methods=['GET'])
 def ver_soc():
     socios = Socio.query.all()
     return render_template('ver_soc.html', socios=socios)
 
 
-#Alterar estado do socio
 @app.route('/altera_soc', methods=['POST'])
 def altera_soc():
     cc = request.form.get('ccs', '')
@@ -247,14 +238,12 @@ def altera_soc():
     return render_template('sucesso.html')
 
 
-#Pagina remove socio
 @app.route('/del_soc', methods=['GET'])
 def del_soc():
     socios = Socio.query.all()
     return render_template('del_soc.html', socios=socios)
 
 
-#Remover socio
 @app.route('/del_soc2', methods=['POST'])
 def del_soc2():
     cc = request.form.get('ccs', '')
@@ -276,7 +265,7 @@ if __name__ == "__main__":
     import  Database.Tables.Socio_Camp
 
     campanha1 = Campanha(nome_camp='Literatura Espanhola')
-    campanha2 = Campanha(nome_camp='Literatura Sueca')
+    campanha2 = Campanha(nome_camp='Literatura Lusófona')
     campanha3 = Campanha(nome_camp='Por todo o mundo...')
     campanha4 = Campanha(nome_camp='Literatura Estrangeira')
     db.session.add(campanha1)
@@ -285,18 +274,18 @@ if __name__ == "__main__":
     db.session.add(campanha4)
 
     livro1 = Livro(ISBN=9789720033109, titulo='O Retrato de Dorian Gray', autor='Oscar Wilde', editora='Porto Editora', ano=2020, requisitado='N')
-    livro2 = Livro(ISBN=9789896445409, titulo='Sapiens', autor='Yuval Noah Harari ', editora='Vintage Publishing,', ano=2015, requisitado='N')
-    livro3 = Livro(ISBN=9789896232245, titulo='Pequena Escola do Pensamento Filosofico', autor='Karl Jaspers ', editora='Cavalo de Ferro', ano=2016, requisitado='N')
+    livro2 = Livro(ISBN=9789896445409, titulo='Sentir & Saber', autor='António Damásio', editora='Temas e Debates,', ano=2020, requisitado='N')
+    livro3 = Livro(ISBN=9789896232245, titulo='Pequena Escola do Pensamento Filosófico', autor='Karl Jaspers ', editora='Cavalo de Ferro', ano=2016, requisitado='N')
     livro4 = Livro(ISBN=9781788162609, titulo='Lives Of The Stoics', autor='Stephen Hanselman e Ryan Holiday ', editora='Profile Books Ltd', ano=2020, requisitado='N')
     db.session.add(livro1)
     db.session.add(livro2)
     db.session.add(livro3)
     db.session.add(livro4)
 
-    socio1 = Socio(cc=12345678, nome_soc='Carolina Santos', email='cs@gmail.com', data_n='03/07/1990', morada='Rua do Parque 7, 7300-456', ano_inscri=2021, ativo='S')
-    socio2 = Socio(cc=12345679, nome_soc='Tiago Silva', email='ts@gmail.com', data_n='22/02/1997', morada='Estrada das Flores 1, 7200-898', ano_inscri=2019, ativo='N')
-    socio3 = Socio(cc=12345676, nome_soc='Rita Calado', email='rc@hotmail.com', data_n='09/12/2000', morada='Rua das Amoreiras, lote 13, 2 esquerdo, 7400-784', ano_inscri=2020, ativo='S')
-    socio4 = Socio(cc=87654321, nome_soc='Rui Oliveira', email='ro@hotmail.com', data_n='29/05/1987', morada='Bairro do Olival 23, 7000-345', ano_inscri=2020, ativo='S')
+    socio = Socio(cc=cc, nome_soc=nome_soc, email=email, data_n=data_n, morada=morada, ano_inscri=ano_inscri, ativo=ativo)
+    socio = Socio(cc=cc, nome_soc=nome_soc, email=email, data_n=data_n, morada=morada, ano_inscri=ano_inscri, ativo=ativo)
+    socio = Socio(cc=cc, nome_soc=nome_soc, email=email, data_n=data_n, morada=morada, ano_inscri=ano_inscri, ativo=ativo)
+    socio = Socio(cc=cc, nome_soc=nome_soc, email=email, data_n=data_n, morada=morada, ano_inscri=ano_inscri, ativo=ativo)
     db.session.add(socio1)
     db.session.add(socio2)
     db.session.add(socio3)

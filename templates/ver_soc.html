@@ -1,9 +1,10 @@
 {% extends "base.html"%}
 {%block title %}Ver sócios - Biblioteca{%endblock%}
+{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
 {%block content%}
 
 <h3>Dados dos sócios</h3>
-<table style="width:100%">
+<table style="width:100%" class="pure-table pure-table-horizontal">
   <tr>
     <th>CC</th>
     <th>Nome </th>

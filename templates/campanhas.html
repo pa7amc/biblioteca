@@ -1,11 +1,13 @@
 {% extends "base.html"%}
 {%block title %}Campanhas - Biblioteca{%endblock%}
+{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
+
 {%block content%}
 
 
 
 <h3>Campanhas</h3>
-<table style="width:100%">
+<table style="width:100%" class="pure-table pure-table-horizontal">
   <tr>
     <th>ID Campanha</th>
     <th>Nome</th>

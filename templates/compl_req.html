@@ -1,5 +1,6 @@
 {% extends "base.html"%}
 {%block title %}Fechar requisito - Biblioteca{%endblock%}
+{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
 {%block content%}
 
 <h3>Fechar requisito</h3>
@@ -21,7 +22,7 @@
 </form>
 <hr />
 <h3>Requisitos</h3>
-<table style="width:100%">
+<table style="width:100%" class="pure-table pure-table-horizontal">
     <tr>
         <th>ID Requisito</th>
         <th>ISBN</th>

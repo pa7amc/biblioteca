@@ -1,9 +1,10 @@
 {% extends "base.html"%}
 {%block title %}Livros - Biblioteca{%endblock%}
+{%block pic %}<img class="bgpic" src="{{ url_for('static', filename = 'imgs/lib.png') }}" alt="logo" />{%endblock%}
 {%block content%}
 
 <h3>Livros</h3>
-<table style="width:100%">
+<table style="width:100%" class="pure-table pure-table-horizontal">
   <tr>
     <th>ISBN</th>
     <th>Título </th>
