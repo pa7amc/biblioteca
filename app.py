@@ -269,12 +269,6 @@ def del_soc2():
 port = int(os.getenv("PORT", 5000))
 
 if __name__ == "__main__":
-    import  Database.Tables.Livro
-    import  Database.Tables.Socio
-    import  Database.Tables.Campanha
-    import  Database.Tables.Requisito
-    import  Database.Tables.Socio_Camp
-
     campanha1 = Campanha(nome_camp='Literatura Espanhola')
     campanha2 = Campanha(nome_camp='Literatura Sueca')
     campanha3 = Campanha(nome_camp='Por todo o mundo...')
