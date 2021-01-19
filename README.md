@@ -5,8 +5,8 @@
 O nome tem, pelo menos, duplo sentido: uma mistura da palavra alfabética + o algoritmo Alpha-beta, muito utilizado em contexto de jogos (de 2 jogadores).
     
 ## Funcionalidades
-- **Livros:** Registar e Ver
+- **Livros:** Registar, Ver e Remover
 - **Sócios:** Registar, Ver e Remover
 - **Requisitos de livros:** Registar, Ver e Completar
-- **Campanhas:** Ver e Registar
-- **Adesões:** Ver e Registar
+- **Campanhas:** Registar, Ver e Remover
+- **Adesões:** Registar, Ver e Remover
