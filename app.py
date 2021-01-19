@@ -100,11 +100,18 @@ def socio_camp2():
     cc_campa = request.form.get('ccs', '')
     novo = request.form.get('novo', '')
 
+    socio1 = db.session.query(Socio_Camp.cc_sc).filter_by(id_camp_sc=id_campa, cc_sc=cc_campa).first()
+
+    if socio1 != None:
+        return render_template('invalido_adesao.html', cc_campa=cc_campa)
+    
+
     sc = Socio_Camp(id_camp_sc=id_campa, cc_sc=cc_campa, novo=novo)
 
     db.session.add(sc)
     db.session.commit()
     return render_template('sucesso.html')
+
 
 
 ########### ####################      REQUISITO
@@ -269,7 +276,7 @@ def del_soc2():
 port = int(os.getenv("PORT", 5000))
 
 if __name__ == "__main__":
-    campanha1 = Campanha(nome_camp='Literatura Espanhola')
+    """ ampanha1 = Campanha(nome_camp='Literatura Espanhola')
     campanha2 = Campanha(nome_camp='Literatura Sueca')
     campanha3 = Campanha(nome_camp='Por todo o mundo...')
     campanha4 = Campanha(nome_camp='Literatura Estrangeira')
@@ -296,6 +303,6 @@ if __name__ == "__main__":
     db.session.add(socio3)
     db.session.add(socio4)
 
-    db.session.commit()
+    db.session.commit() """
     db.create_all()
     app.run(host='0.0.0.0', port=port)
