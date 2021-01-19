@@ -82,6 +82,15 @@ def reg_camp():
     db.session.commit()
     return render_template('sucesso.html')
 
+#Remover livro
+@app.route('/del_camp', methods=['POST'])
+def del_camp():
+    campa = request.form.get('campa', '')
+    Campanha.query.filter_by(id_camp=campa).delete()
+    db.session.commit()
+    return render_template('sucesso.html')
+
+
 
 ########### ####################      ADESAO
 #Pagina adesao
@@ -100,15 +109,32 @@ def socio_camp2():
     cc_campa = request.form.get('ccs', '')
     novo = request.form.get('novo', '')
 
-    socio1 = db.session.query(Socio_Camp.cc_sc).filter_by(id_camp_sc=id_campa, cc_sc=cc_campa).first()
+    adesao = db.session.query(Socio_Camp.cc_sc).filter_by(id_camp_sc=id_campa, cc_sc=cc_campa).first()
 
-    if socio1 != None:
+    if adesao != None:
         return render_template('invalido_adesao.html', cc_campa=cc_campa)
     
 
     sc = Socio_Camp(id_camp_sc=id_campa, cc_sc=cc_campa, novo=novo)
 
     db.session.add(sc)
+    db.session.commit()
+    return render_template('sucesso.html')
+
+
+#Remover adesao
+@app.route('/del_adesao', methods=['POST'])
+def del_adesao():
+    campa = request.form.get('campa', '')
+    cc = request.form.get('ccs', '')
+
+    adesao = db.session.query(Socio_Camp.id_sc).filter_by(id_camp_sc=campa, cc_sc=cc).first()
+    #se o socio nao se encontrava no registo da adesao da campanha
+    if  adesao is None:
+        return render_template('invalido_rem_adesao.html', cc_campa=cc, id_camp_sc=campa)
+
+
+    Socio_Camp.query.filter_by(id_camp_sc=campa, cc_sc=cc).delete()
     db.session.commit()
     return render_template('sucesso.html')
 
@@ -210,6 +236,23 @@ def reg_livro2():
 def ver_livros():
     livros = Livro.query.all()
     return render_template('ver_livros.html', livros=livros)
+
+
+#Pagina remove livro
+@app.route('/del_livro', methods=['GET'])
+def del_livro():
+    livros = Livro.query.all()
+    return render_template('del_livro.html', livros=livros)
+
+
+#Remover livro
+@app.route('/del_livro2', methods=['POST'])
+def del_livro2():
+    isbn = request.form.get('isbns', '')
+    Livro.query.filter_by(ISBN=isbn).delete()
+    db.session.commit()
+    return render_template('sucesso.html')
+
 
 
 ########### ####################      SOCIO

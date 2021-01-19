@@ -48,6 +48,31 @@
     <input type="submit" class="sub final" value="Registo da adesão" />
 </form>
 
+
+<hr />
+<h2>Remover adesão</h2>
+<form action="/del_adesao" method="post">
+
+    <p>Campanha</p>
+    <select name="campa" id="campa">
+        {% for camp in campanhas %}
+        <option value="{{ camp.id_camp}}">
+            {{camp.id_camp}} - {{camp.nome_camp}}
+        </option>
+        {% endfor %}
+    </select>
+
+    <p>Cartão de Cidadão</p>
+    <select name="ccs" id="ccs">
+        {% for socio in socios %}
+        <option value="{{ socio.cc }}">{{socio.cc}} - {{socio.nome_soc}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" class="sub final" value="Remoção da adesão">
+
+</form>
+
 <hr />
 <div class="dropdown">
     <li><a href="/"><button class="dropbtn botoes ">Início</button></a>

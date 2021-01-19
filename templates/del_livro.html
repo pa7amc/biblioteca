@@ -1,0 +1,28 @@
+{% extends "base.html"%} {%block title %}Remover livros - Biblioteca{%endblock%} {%block pic %}<img class="bgpic"
+    src="{{ url_for('static', filename = 'imgs/bb.png') }}" alt="logo" />{%endblock%} {%block content%}
+
+
+
+<hr />
+<h2>Remover livro</h2>
+<form action="/del_livro2" method="post">
+
+
+    <p>ISBN</p>
+    <select name="isbns" id="isbns">
+        {% for l in livros %}
+        <option value="{{ l.ISBN }}">{{l.ISBN}} - {{l.titulo}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" class="sub final" value="Remover" />
+</form>
+
+<hr />
+<div class="dropdown">
+    <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
+    </li>
+</div>
+
+
+{%endblock%}

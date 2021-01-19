@@ -29,6 +29,21 @@
 </form>
 
 <hr />
+<h2>Remover campanha</h2>
+<form action="/del_camp" method="post">
+    <p>Campanha</p>
+    <select name="campa" id="campa">
+        {% for c in campanhas %}
+        <option value="{{ c.id_camp }}">{{c.id_camp}} - {{c.nome_camp}}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" class="sub final" value="Remoção da Campanha">
+
+</form>
+
+
+<hr />
 <div class="dropdown">
     <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
     </li>
