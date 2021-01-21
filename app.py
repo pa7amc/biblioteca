@@ -59,7 +59,6 @@ class Socio_Camp(db.Model):
 
 
 
-
 @app.route('/', methods=['GET'])
 def home():
     return render_template('home.html')
@@ -319,33 +318,5 @@ def del_soc2():
 port = int(os.getenv("PORT", 5000))
 
 if __name__ == "__main__":
-    """ ampanha1 = Campanha(nome_camp='Literatura Espanhola')
-    campanha2 = Campanha(nome_camp='Literatura Sueca')
-    campanha3 = Campanha(nome_camp='Por todo o mundo...')
-    campanha4 = Campanha(nome_camp='Literatura Estrangeira')
-    db.session.add(campanha1)
-    db.session.add(campanha2)
-    db.session.add(campanha3)
-    db.session.add(campanha4)
-
-    livro1 = Livro(ISBN=9789720033109, titulo='O Retrato de Dorian Gray', autor='Oscar Wilde', editora='Porto Editora', ano=2020, requisitado='N')
-    livro2 = Livro(ISBN=9789896445409, titulo='Sapiens', autor='Yuval Noah Harari ', editora='Vintage Publishing,', ano=2015, requisitado='N')
-    livro3 = Livro(ISBN=9789896232245, titulo='Pequena Escola do Pensamento Filosofico', autor='Karl Jaspers ', editora='Cavalo de Ferro', ano=2016, requisitado='N')
-    livro4 = Livro(ISBN=9781788162609, titulo='Lives Of The Stoics', autor='Stephen Hanselman e Ryan Holiday ', editora='Profile Books Ltd', ano=2020, requisitado='N')
-    db.session.add(livro1)
-    db.session.add(livro2)
-    db.session.add(livro3)
-    db.session.add(livro4)
-
-    socio1 = Socio(cc=12345678, nome_soc='Carolina Santos', email='cs@gmail.com', data_n='03/07/1990', morada='Rua do Parque 7, 7300-456', ano_inscri=2021, ativo='S')
-    socio2 = Socio(cc=12345679, nome_soc='Tiago Silva', email='ts@gmail.com', data_n='22/02/1997', morada='Estrada das Flores 1, 7200-898', ano_inscri=2019, ativo='N')
-    socio3 = Socio(cc=12345676, nome_soc='Rita Calado', email='rc@hotmail.com', data_n='09/12/2000', morada='Rua das Amoreiras, lote 13, 2 esquerdo, 7400-784', ano_inscri=2020, ativo='S')
-    socio4 = Socio(cc=87654321, nome_soc='Rui Oliveira', email='ro@hotmail.com', data_n='29/05/1987', morada='Bairro do Olival 23, 7000-345', ano_inscri=2020, ativo='S')
-    db.session.add(socio1)
-    db.session.add(socio2)
-    db.session.add(socio3)
-    db.session.add(socio4)
-
-    db.session.commit() """
     db.create_all()
     app.run(host='0.0.0.0', port=port)

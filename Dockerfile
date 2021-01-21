@@ -1,12 +1,18 @@
-FROM python:3
+FROM python:3.8
 
 RUN pip install poetry
 
 RUN mkdir /app
 
-COPY . /app
-
 WORKDIR /app
+
+COPY pyproject.toml poetry.lock /app/
+
+COPY resources/db.sqlite3 /app/
+
+COPY static /app/static
+COPY templates /app/templates
+COPY app.py /app/
 
 RUN poetry config virtualenvs.create false && poetry install
 
