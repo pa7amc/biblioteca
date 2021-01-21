@@ -44,7 +44,7 @@ class Requisito(db.Model):
     cc_req = db.Column(db.Integer, db.ForeignKey('socio.cc'))
     data_req = db.Column(db.String(10))
     data_entr = db.Column(db.String(10))
-    completo = db.Column(db.String(1), default='S')
+    completo = db.Column(db.String(1))
 
 
 class Socio_Camp(db.Model):
@@ -52,7 +52,6 @@ class Socio_Camp(db.Model):
     id_sc = db.Column(db.Integer, primary_key=True)
     id_camp_sc = db.Column(db.Integer, db.ForeignKey('campanha.id_camp'))
     cc_sc = db.Column(db.Integer, db.ForeignKey('socio.cc'))
-    #se comecou a ser socio naquela campanha - 'S', senao - 'N'
     novo = db.Column(db.String(1))
 
 
