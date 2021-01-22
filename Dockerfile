@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock /app/
 
-COPY db.sqlite3 /app/
+COPY resources/db.sqlite3 /app/
 
 COPY static /app/static
 COPY templates /app/templates
