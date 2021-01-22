@@ -16,10 +16,6 @@ O nome tem, pelo menos, duplo sentido: uma mistura da palavra alfabética + o al
 
 Este comando vai fazer launch da aplicação já com alguns dados previamente inseridos. A aplicação estará disponível em http://127.0.0.1:5000.
 
-**Resolução de evental erro 'Warning: The lock file is not up to date with the latest changes in pyproject.toml'**
-
-https://stackoverflow.com/questions/62040724/warning-the-lock-file-is-not-up-to-date-with-the-latest-changes-in-pyproject-to
-
 ## Correr localmente
 
 Instalar **poetry**: https://python-poetry.org/docs/#installation
