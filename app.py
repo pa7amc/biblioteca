@@ -109,6 +109,7 @@ def socio_camp2():
 
     adesao = db.session.query(Socio_Camp.cc_sc).filter_by(id_camp_sc=id_campa, cc_sc=cc_campa).first()
 
+    #socio ja estava registado na campanha 
     if adesao != None:
         return render_template('invalido_adesao.html', cc_campa=cc_campa)
     

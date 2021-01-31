@@ -18,6 +18,9 @@ run: clean init
 
 empty: clean emp
 	@python app.py
+
+keep: 
+	@python app.py
 	
 docker: clean init
 	docker build -t alphabeta .
