@@ -20,7 +20,9 @@ Este comando vai fazer launch da aplicação já com alguns dados previamente in
 
 Instalar **poetry**: https://python-poetry.org/docs/#installation
 
-Instalar **dependências** do projeto: `poetry install`
+Instalar **dependências** do projeto: `poetry install --no-root`
+
+*(Adding the --no-root will not install the root package.)*
 
 Entrar no ambiente virtual: `poetry shell`
 
