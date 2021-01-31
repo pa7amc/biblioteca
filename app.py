@@ -247,6 +247,12 @@ def del_livro():
 @app.route('/del_livro2', methods=['POST'])
 def del_livro2():
     isbn = request.form.get('isbns', '')
+    livro1 = db.session.query(Livro.requisitado).filter_by(ISBN=isbn).first()
+
+        #se o livro esta requisitado, nao se pode apagar
+    if livro1.requisitado == "S":
+            return render_template('invalido_livro.html', ISBN=isbn)
+
     Livro.query.filter_by(ISBN=isbn).delete()
     db.session.commit()
     return render_template('sucesso.html')
@@ -306,6 +312,14 @@ def del_soc():
 @app.route('/del_soc2', methods=['POST'])
 def del_soc2():
     cc = request.form.get('ccs', '')
+
+    req_ativo = db.session.query(Requisito.id_req).filter_by(cc_req=cc, completo="N").first()
+
+        #se o socio tiver requisitos por fechar
+    if req_ativo != None:
+            return render_template('invalido_rem_soc.html', cc=cc)
+
+
     Socio.query.filter_by(cc=cc).delete()
     db.session.commit()
     return render_template('sucesso.html')

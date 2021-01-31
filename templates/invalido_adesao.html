@@ -1,14 +1,20 @@
-{% extends "base.html"%} {%block title %}Inválido (sócio) - Biblioteca{%endblock%} {%block pic %}<img class="bgpic"
-    src="{{ url_for('static', filename = 'imgs/bb.png') }}" alt="logo" />{%endblock%} {%block content%}
+{% extends "base.html"%} {%block title %}Inválido adesão (sócio) -
+Biblioteca{%endblock%} {%block pic %}<img
+      class="bgpic"
+      src="{{ url_for('static', filename = 'imgs/bb.png') }}"
+      alt="logo"
+/>{%endblock%} {%block content%}
 
-
-
-<p>Procedimento inválido, o sócio {{cc_campa}} já foi registado nesta campanha!</p>
+<p>
+      Procedimento inválido, o sócio {{cc_campa}} já foi registado nesta
+      campanha!
+</p>
 
 <hr />
 <div class="dropdown">
-    <li><a href="/"><button class="dropbtn botoes ">Início</button></a>
-    </li>
+      <li>
+            <a href="/"><button class="dropbtn botoes">Início</button></a>
+      </li>
 </div>
 
 {%endblock%}

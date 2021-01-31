@@ -1,11 +1,11 @@
-{% extends "base.html"%} {%block title %}Inválido (livro) -
+{% extends "base.html"%} {%block title %}Inválido remoção (sócio) -
 Biblioteca{%endblock%} {%block pic %}<img
       class="bgpic"
       src="{{ url_for('static', filename = 'imgs/bb.png') }}"
       alt="logo"
 />{%endblock%} {%block content%}
 
-<p>Procedimento inválido, o livro {{ISBN}} encontra-se requisitado!</p>
+<p>Procedimento inválido, o sócio {{cc}} tem requisições por fechar!</p>
 
 <hr />
 <div class="dropdown">
